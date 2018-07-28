@@ -3,6 +3,8 @@ package com.udacity.gradle.builditbigger;
 import android.content.Intent;
 import android.mohamedalaa.com.displayerandoirdlibrary.DisplayerMainActivity;
 import android.os.Bundle;
+import android.support.annotation.VisibleForTesting;
+import android.support.test.espresso.IdlingResource;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.Menu;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.udacity.gradle.builditbigger.utils.JokeEndPointsAsyncTask;
+import com.udacity.gradle.builditbigger.utils.SimpleIdlingResource;
 
 
 public class MainActivity extends AppCompatActivity implements
@@ -27,6 +30,8 @@ public class MainActivity extends AppCompatActivity implements
 
     /** to change the gravity of the toast textView only when needed which is once */
     private boolean gravityToastNeedsGravityChange = true;
+
+    private SimpleIdlingResource idlingResource;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +64,11 @@ public class MainActivity extends AppCompatActivity implements
 
     public void tellJoke(View view) {
         // result should be handled by the provided listener here.
+
+        if (idlingResource != null){
+            idlingResource.setIdleState(false);
+        }
+
         new JokeEndPointsAsyncTask(this).execute();
     }
 
@@ -103,5 +113,20 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onJokeStringReceived(String jokeString) {
         startDisplayerActivity(jokeString);
+
+        if (idlingResource != null){
+            idlingResource.setIdleState(true);
+        }
+    }
+
+    // ---- For Testing
+
+    @VisibleForTesting
+    public IdlingResource getIdlingResource(){
+        if (idlingResource == null){
+            idlingResource = new SimpleIdlingResource();
+        }
+
+        return idlingResource;
     }
 }
