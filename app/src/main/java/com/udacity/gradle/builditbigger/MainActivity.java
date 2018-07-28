@@ -1,10 +1,12 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Context;
 import android.content.Intent;
 import android.mohamedalaa.com.displayerandoirdlibrary.DisplayerMainActivity;
 import android.mohamedalaa.com.jokes.JokeTeller;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +14,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.udacity.gradle.builditbigger.utils.EndpointsAsyncTask;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -58,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
     public void tellJoke(View view) {
         String jokeString = JokeTeller.getRandomJoke();
 
-        Intent displayerIntent = new Intent(this, DisplayerMainActivity.class);
+        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
+
+        /*Intent displayerIntent = new Intent(this, DisplayerMainActivity.class);
         displayerIntent.putExtra(DisplayerMainActivity.INTENT_KEY_JOKE_STRING, jokeString);
-        startActivity(displayerIntent);
+        startActivity(displayerIntent);*/
 
         //showToast(jokeString);
     }

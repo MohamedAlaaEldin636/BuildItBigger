@@ -42,10 +42,15 @@ dependencies {
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
     implementation 'com.google.code.findbugs:jsr305:3.0.1'
 
+    // Timber
+    implementation 'com.jakewharton.timber:timber:4.7.0'
+
     // jokes ( Inner Java Library )
     implementation project(":jokes")
     // displayer ( Inner Android Library )
     implementation project(":displayer")
+    //
+    implementation project(":backend")
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
