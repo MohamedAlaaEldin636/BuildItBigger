@@ -1,5 +1,7 @@
 package com.udacity.gradle.builditbigger;
 
+import android.content.Intent;
+import android.mohamedalaa.com.displayerandoirdlibrary.DisplayerMainActivity;
 import android.mohamedalaa.com.jokes.JokeTeller;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -54,7 +56,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        showToast(JokeTeller.getRandomJoke());
+        String jokeString = JokeTeller.getRandomJoke();
+
+        Intent displayerIntent = new Intent(this, DisplayerMainActivity.class);
+        displayerIntent.putExtra(DisplayerMainActivity.INTENT_KEY_JOKE_STRING, jokeString);
+        startActivity(displayerIntent);
+
+        //showToast(jokeString);
     }
 
     // ---- Private Helper Methods

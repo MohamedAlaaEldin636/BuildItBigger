@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">displayerAndoirdLibrary</string>
+
+    <!-- activity_displayer_main.xml -->
+    <string name="main_image_view_content_description">Laughing Icon</string>
+
+    <!-- Displayer Main Activity -->
+    <string name="error_joke_received">Error in receiving text</string>
+
+</resources>
