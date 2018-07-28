@@ -45,11 +45,9 @@ dependencies {
     // Timber
     implementation 'com.jakewharton.timber:timber:4.7.0'
 
-    // jokes ( Inner Java Library )
-    implementation project(":jokes")
     // displayer ( Inner Android Library )
     implementation project(":displayer")
-    //
+    // backend ( Inner Library )
     implementation project(":backend")
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {

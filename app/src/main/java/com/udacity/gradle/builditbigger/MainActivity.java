@@ -1,12 +1,9 @@
 package com.udacity.gradle.builditbigger;
 
-import android.content.Context;
 import android.content.Intent;
 import android.mohamedalaa.com.displayerandoirdlibrary.DisplayerMainActivity;
-import android.mohamedalaa.com.jokes.JokeTeller;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Pair;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,10 +12,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.udacity.gradle.builditbigger.utils.EndpointsAsyncTask;
+import com.udacity.gradle.builditbigger.utils.JokeEndPointsAsyncTask;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements
+        JokeEndPointsAsyncTask.JokeEndPointsAsyncTaskListener {
 
     /**
      * Made so that, when we press on the button several times we only see the last toast,
@@ -60,15 +58,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tellJoke(View view) {
-        String jokeString = JokeTeller.getRandomJoke();
-
-        new EndpointsAsyncTask().execute(new Pair<Context, String>(this, "Manfred"));
-
-        /*Intent displayerIntent = new Intent(this, DisplayerMainActivity.class);
-        displayerIntent.putExtra(DisplayerMainActivity.INTENT_KEY_JOKE_STRING, jokeString);
-        startActivity(displayerIntent);*/
-
-        //showToast(jokeString);
+        // result should be handled by the provided listener here.
+        new JokeEndPointsAsyncTask(this).execute();
     }
 
     // ---- Private Helper Methods
@@ -99,4 +90,18 @@ public class MainActivity extends AppCompatActivity {
         toast.show();
     }
 
+    private void startDisplayerActivity(String jokeString){
+        //showToast(jokeString);
+
+        Intent displayerIntent = new Intent(this, DisplayerMainActivity.class);
+        displayerIntent.putExtra(DisplayerMainActivity.INTENT_KEY_JOKE_STRING, jokeString);
+        startActivity(displayerIntent);
+    }
+
+    // ---- JokeEndPointsAsyncTaskListener Interface Implemented Methods
+
+    @Override
+    public void onJokeStringReceived(String jokeString) {
+        startDisplayerActivity(jokeString);
+    }
 }
