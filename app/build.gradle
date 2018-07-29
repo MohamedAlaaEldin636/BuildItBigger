@@ -31,6 +31,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    flavorDimensions 'appVar'
+    productFlavors {
+        free {
+            applicationId "com.udacity.gradle.builditbigger.free"
+            dimension 'appVar'
+        }
+        paid {
+            applicationId "com.udacity.gradle.builditbigger.paid"
+            dimension 'appVar'
+        }
+    }
 }
 
 dependencies {
@@ -47,8 +59,6 @@ dependencies {
 
     // displayer ( Inner Android Library )
     implementation project(":displayer")
-    // backend ( Inner Library )
-    implementation project(":backend")
 
     androidTestImplementation('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
