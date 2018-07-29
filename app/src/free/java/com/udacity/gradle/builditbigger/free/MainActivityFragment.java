@@ -1,5 +1,7 @@
 package com.udacity.gradle.builditbigger.free;
 
+import android.content.Intent;
+import android.mohamedalaa.com.displayerandoirdlibrary.DisplayerMainActivity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
